@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const password = formData.get('password') as string;
 
-  if (password !== ADMIN_PASSWORD) {
+  if (!password || password.trim() !== ADMIN_PASSWORD.trim()) {
     const url = new URL('/admin?error=invalid', request.url);
     return NextResponse.redirect(url);
   }
