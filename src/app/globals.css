@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────
+   Mark Bunting Human Communications
+   FIRE-themed bright, energetic colour scheme
+   ────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary — Flame Orange */
+  --color-primary: #F97316;
+  --color-primary-light: #FB923C;
+  --color-primary-dark: #EA580C;
+
+  /* Secondary — Ember Red */
+  --color-secondary: #DC2626;
+  --color-secondary-light: #EF4444;
+  --color-secondary-dark: #B91C1C;
+
+  /* Accent — Amber Gold */
+  --color-accent: #F59E0B;
+  --color-accent-light: #FCD34D;
+  --color-accent-dark: #D97706;
+
+  /* Neutrals */
+  --color-charcoal: #1F2937;
+  --color-charcoal-light: #374151;
+  --color-slate: #6B7280;
+  --color-warm-gray: #9CA3AF;
+  --color-cream: #FFFBF5;
+  --color-warm-white: #FFF7ED;
+  --color-white: #FFFFFF;
+
+  /* Gradients */
+  --gradient-fire: linear-gradient(135deg, #F59E0B 0%, #F97316 40%, #DC2626 100%);
+  --gradient-ember: linear-gradient(135deg, #F97316 0%, #DC2626 100%);
+  --gradient-warm: linear-gradient(180deg, #FFFBF5 0%, #FFF7ED 100%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Core palette */
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-light: var(--color-secondary-light);
+  --color-secondary-dark: var(--color-secondary-dark);
+
+  --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
+  --color-accent-dark: var(--color-accent-dark);
+
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-light: var(--color-charcoal-light);
+  --color-slate: var(--color-slate);
+  --color-warm-gray: var(--color-warm-gray);
+  --color-cream: var(--color-cream);
+  --color-warm-white: var(--color-warm-white);
+
+  /* Semantic aliases for fire theme */
+  --color-flame: #F97316;
+  --color-ember: #DC2626;
+  --color-amber: #F59E0B;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base styles ─────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.7;
+}
+
+/* ── Typography ──────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-charcoal);
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+/* ── Selection ───────────────────────────────── */
+
+::selection {
+  background-color: #FDBA74;
+  color: var(--color-charcoal);
+}
+
+/* ── Focus styles ────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Utility classes ─────────────────────────── */
+
+.gradient-fire {
+  background: var(--gradient-fire);
+}
+
+.gradient-ember {
+  background: var(--gradient-ember);
+}
+
+.gradient-warm {
+  background: var(--gradient-warm);
+}
+
+.text-gradient-fire {
+  background: var(--gradient-fire);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
