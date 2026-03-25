@@ -1,140 +1,82 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Flame, Clock, ArrowRight, BookOpen } from "lucide-react";
+import { db } from "@/lib/db";
+import { blogPosts } from "@/lib/db/schema";
+import { desc, eq } from "drizzle-orm";
 
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  category: string;
-  categoryColor: "secondary" | "primary" | "accent";
-  image?: string;
-}
-
-const posts: BlogPost[] = [
-  {
-    slug: "the-ultimate-compliment",
-    title: "The Ultimate Compliment",
-    excerpt:
-      "What if the best thing you could say to someone had nothing to do with their appearance, their job title, or their achievements? Here is the compliment that changes relationships.",
-    date: "15 March 2026",
-    readTime: "4 min",
-    category: "Connection",
-    categoryColor: "primary",
-    image: "/images/mark-workshop-action.webp",
-  },
-  {
-    slug: "one-little-word",
-    title: "One Little Word That Can Shift Everything",
-    excerpt:
-      "There is a single word most of us use every day that is quietly sabotaging our conversations. Swap it out and watch what happens.",
-    date: "8 March 2026",
-    readTime: "3 min",
-    category: "Language",
-    categoryColor: "accent",
-    image: "/images/mark-audience-laughing.webp",
-  },
-  {
-    slug: "break-this-golden-rule",
-    title: "Please Break This Golden Rule of Communication",
-    excerpt:
-      "We have all been taught treat others the way you want to be treated. But what if that advice is actually the source of most miscommunication? Time for an upgrade.",
-    date: "28 February 2026",
-    readTime: "5 min",
-    category: "Framework",
-    categoryColor: "secondary",
-    image: "/images/mark-presenting.jpg",
-  },
-  {
-    slug: "orange-flame-accidental-exercise",
-    title: "An Orange Flame Gets Accidental Exercise",
-    excerpt:
-      "When your communication style means you cannot walk past a single person without stopping to chat, even a trip to the supermarket becomes a marathon.",
-    date: "20 February 2026",
-    readTime: "3 min",
-    category: "Orange Flame",
-    categoryColor: "primary",
-    image: "/images/mark-event-selfie.webp",
-  },
-  {
-    slug: "naming-and-faming",
-    title: "Warning: Naming and Faming Follows",
-    excerpt:
-      "Why calling out what people do well, publicly and specifically, is one of the most underused tools in every leader kit.",
-    date: "12 February 2026",
-    readTime: "4 min",
-    category: "Leadership",
-    categoryColor: "secondary",
-    image: "/images/mark-group-photo.webp",
-  },
-  {
-    slug: "air-new-zealand",
-    title: "Air New Zealand Was a Really Great Airline",
-    excerpt:
-      "A story about what happens when an organisation loses the communication culture that made it special, and what the rest of us can learn from it.",
-    date: "5 February 2026",
-    readTime: "6 min",
-    category: "Culture",
-    categoryColor: "accent",
-    image: "/images/quote-wayne-dyer.jpg",
-  },
-  {
-    slug: "waikato-open-flames",
-    title: "How Waikato Locals Seek First to Understand with Open Flames",
-    excerpt:
-      "A visit to the Waikato showed Mark just how naturally some communities already practise what he teaches. Here is what he learned from the locals.",
-    date: "28 January 2026",
-    readTime: "5 min",
-    category: "Framework",
-    categoryColor: "secondary",
-    image: "/images/mark-school-workshop.webp",
-  },
-  {
-    slug: "orange-flame-needs-people",
-    title: "An Orange Flame Neeeeeds People",
-    excerpt:
-      "If you have ever felt physically depleted after a day alone, you might be an Orange Flame. Here is why some of us are wired for connection.",
-    date: "20 January 2026",
-    readTime: "4 min",
-    category: "Orange Flame",
-    categoryColor: "primary",
-    image: "/images/mark-feedback.webp",
-  },
-  {
-    slug: "better-listener-question",
-    title: "Want to Be a Better Listener? Ask Yourself This Simple Question",
-    excerpt:
-      "Listening is not about silence, it is about intention. One question you can ask yourself before every conversation that will transform how people experience you.",
-    date: "12 January 2026",
-    readTime: "3 min",
-    category: "Listening",
-    categoryColor: "accent",
-    image: "/images/mark-portrait-bw.png",
-  },
-];
+export const revalidate = 60;
 
 const categoryColors: Record<string, string> = {
-  secondary: "bg-secondary/10 text-secondary",
-  primary: "bg-primary/10 text-primary",
-  accent: "bg-accent/10 text-accent-dark",
+  Connection: "bg-primary/10 text-primary",
+  Language: "bg-accent/10 text-accent-dark",
+  Framework: "bg-secondary/10 text-secondary",
+  "Orange Flame": "bg-primary/10 text-primary",
+  Leadership: "bg-secondary/10 text-secondary",
+  Culture: "bg-accent/10 text-accent-dark",
+  Listening: "bg-accent/10 text-accent-dark",
 };
 
-export default function BlogPage() {
+function getCategoryColor(category: string): string {
+  return categoryColors[category] || "bg-primary/10 text-primary";
+}
+
+function formatDate(date: Date | null): string {
+  if (!date) return "";
+  return date.toLocaleDateString("en-NZ", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+export default async function BlogPage() {
+  const posts = await db
+    .select()
+    .from(blogPosts)
+    .where(eq(blogPosts.published, true))
+    .orderBy(desc(blogPosts.publishedAt));
+
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-screen bg-cream">
+        <section className="relative overflow-hidden py-16 md:py-24">
+          <div className="absolute inset-0 bg-gradient-to-br from-warm-white to-cream" />
+          <div className="relative mx-auto max-w-3xl px-6 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 mb-6">
+              <BookOpen className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold text-primary">Blog</span>
+            </div>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-4">
+              The Fire Blog
+            </h1>
+            <p className="text-lg text-charcoal-light max-w-lg mx-auto mb-12">
+              Insights, stories, and practical ideas about communication &mdash;
+              from the frontline of human connection.
+            </p>
+            <div className="rounded-2xl bg-white shadow-sm border border-primary/10 p-12">
+              <Flame className="w-12 h-12 text-primary/30 mx-auto mb-4" />
+              <p className="font-display text-xl font-bold text-charcoal mb-2">
+                Posts are on the way
+              </p>
+              <p className="text-charcoal-light">
+                New articles will appear here soon. Check back shortly.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  const [featured, ...rest] = posts;
+
   return (
     <div className="min-h-screen bg-cream">
       {/* Hero */}
       <section className="relative overflow-hidden py-16 md:py-24">
         <div className="absolute inset-0 bg-gradient-to-br from-warm-white to-cream" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative mx-auto max-w-3xl px-6 text-center"
-        >
+        <div className="relative mx-auto max-w-3xl px-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 mb-6">
             <BookOpen className="w-4 h-4 text-primary" />
             <span className="text-sm font-semibold text-primary">Blog</span>
@@ -146,79 +88,72 @@ export default function BlogPage() {
             Insights, stories, and practical ideas about communication &mdash;
             from the frontline of human connection.
           </p>
-        </motion.div>
+        </div>
       </section>
 
       {/* Featured Post */}
       <section className="pb-8">
         <div className="mx-auto max-w-6xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Link href="#" className="group block">
-              <div className="grid md:grid-cols-2 gap-0 rounded-2xl bg-white shadow-sm border border-primary/10 overflow-hidden">
-                <div className="relative h-64 md:h-auto min-h-[280px]">
-                  {posts[0].image ? (
-                    <Image
-                      src={posts[0].image}
-                      alt={posts[0].title}
-                      fill
-                      unoptimized
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="h-full gradient-fire flex items-center justify-center">
-                      <Flame className="w-16 h-16 text-white/60 group-hover:scale-110 transition-transform" />
-                    </div>
-                  )}
+          <Link href={`/blog/${featured.slug}`} className="group block">
+            <div className="grid md:grid-cols-2 gap-0 rounded-2xl bg-white shadow-sm border border-primary/10 overflow-hidden hover:shadow-md transition-shadow duration-300">
+              <div className="relative h-64 md:h-auto min-h-[280px]">
+                {featured.imageUrl ? (
+                  <Image
+                    src={featured.imageUrl}
+                    alt={featured.title}
+                    fill
+                    unoptimized
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="h-full gradient-fire flex items-center justify-center">
+                    <Flame className="w-16 h-16 text-white/60 group-hover:scale-110 transition-transform" />
+                  </div>
+                )}
+              </div>
+              <div className="p-8 md:p-10 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${getCategoryColor(featured.category)}`}
+                  >
+                    {featured.category}
+                  </span>
+                  <span className="text-xs text-slate">
+                    {formatDate(featured.publishedAt)}
+                  </span>
                 </div>
-                <div className="p-8 md:p-10 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span
-                      className={`inline-block rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[posts[0].categoryColor]}`}
-                    >
-                      {posts[0].category}
-                    </span>
-                    <span className="text-xs text-slate">{posts[0].date}</span>
-                  </div>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal mb-3 group-hover:text-primary transition-colors">
-                    {posts[0].title}
-                  </h2>
-                  <p className="text-charcoal-light leading-relaxed mb-5">
-                    {posts[0].excerpt}
-                  </p>
-                  <div className="flex items-center gap-2 text-sm font-medium text-primary">
-                    Read more{" "}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal mb-3 group-hover:text-primary transition-colors">
+                  {featured.title}
+                </h2>
+                <p className="text-charcoal-light leading-relaxed mb-5">
+                  {featured.excerpt}
+                </p>
+                <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                  Read more{" "}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-            </Link>
-          </motion.div>
+            </div>
+          </Link>
         </div>
       </section>
 
       {/* Post Grid */}
-      <section className="py-12 md:py-16 pb-20 md:pb-28">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.slice(1).map((post, i) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-              >
-                <Link href="#" className="group block h-full">
-                  <article className="flex flex-col h-full rounded-2xl bg-white shadow-sm border border-primary/10 overflow-hidden hover:shadow-md transition-shadow">
+      {rest.length > 0 && (
+        <section className="py-12 md:py-16 pb-20 md:pb-28">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {rest.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group block h-full"
+                >
+                  <article className="flex flex-col h-full rounded-2xl bg-white shadow-sm border border-primary/10 overflow-hidden hover:shadow-md transition-shadow duration-300">
                     <div className="relative h-44">
-                      {post.image ? (
+                      {post.imageUrl ? (
                         <Image
-                          src={post.image}
+                          src={post.imageUrl}
                           alt={post.title}
                           fill
                           unoptimized
@@ -233,7 +168,7 @@ export default function BlogPage() {
                     <div className="flex flex-col flex-1 p-6">
                       <div className="flex items-center gap-3 mb-3">
                         <span
-                          className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${categoryColors[post.categoryColor]}`}
+                          className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${getCategoryColor(post.category)}`}
                         >
                           {post.category}
                         </span>
@@ -245,20 +180,16 @@ export default function BlogPage() {
                         {post.excerpt}
                       </p>
                       <div className="flex items-center justify-between text-xs text-slate">
-                        <span>{post.date}</span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {post.readTime}
-                        </span>
+                        <span>{formatDate(post.publishedAt)}</span>
                       </div>
                     </div>
                   </article>
                 </Link>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }
