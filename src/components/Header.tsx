@@ -3,11 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Flame } from "lucide-react";
+import { Menu, X, Flame, ChevronDown } from "lucide-react";
+
+const serviceLinks = [
+  { href: "/services/find-your-fire", label: "Find Your Fire" },
+  { href: "/services/spread-your-fire", label: "Spread Your Fire" },
+  { href: "/services/speech-savers", label: "Speech Savers" },
+];
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/quiz", label: "15 Fast Flames" },
+  { href: "/services", label: "Services", hasDropdown: true },
+  { href: "/quiz", label: "Quiz" },
   { href: "/blog", label: "Blog" },
   { href: "/podcast", label: "Podcast" },
   { href: "/contact", label: "Contact" },
@@ -15,6 +23,8 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-primary/10">
@@ -26,16 +36,57 @@ export default function Header() {
           </span>
         </Link>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-charcoal-light hover:text-primary transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) =>
+            link.hasDropdown ? (
+              <div
+                key={link.href}
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
+              >
+                <Link
+                  href={link.href}
+                  className="flex items-center gap-1 text-sm font-medium text-charcoal-light hover:text-primary transition-colors"
+                >
+                  {link.label}
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+                </Link>
+                <AnimatePresence>
+                  {servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+                    >
+                      <div className="w-52 rounded-xl bg-white shadow-lg border border-primary/10 py-2">
+                        {serviceLinks.map((s) => (
+                          <Link
+                            key={s.href}
+                            href={s.href}
+                            className="block px-4 py-2.5 text-sm text-charcoal-light hover:bg-primary/5 hover:text-primary transition-colors"
+                          >
+                            {s.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-charcoal-light hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
           <Link
             href="/contact"
             className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white hover:bg-primary-dark transition-colors"
@@ -53,6 +104,7 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Mobile Nav */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.nav
@@ -63,16 +115,59 @@ export default function Header() {
             className="md:hidden overflow-hidden border-t border-primary/10 bg-cream"
           >
             <div className="flex flex-col gap-4 px-6 py-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-base font-medium text-charcoal-light hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.hasDropdown ? (
+                  <div key={link.href}>
+                    <button
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className="flex items-center justify-between w-full text-base font-medium text-charcoal-light hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    <AnimatePresence>
+                      {mobileServicesOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="flex flex-col gap-3 pl-4 pt-3">
+                            <Link
+                              href="/services"
+                              onClick={() => setMobileOpen(false)}
+                              className="text-sm font-medium text-charcoal-light hover:text-primary transition-colors"
+                            >
+                              All Services
+                            </Link>
+                            {serviceLinks.map((s) => (
+                              <Link
+                                key={s.href}
+                                href={s.href}
+                                onClick={() => setMobileOpen(false)}
+                                className="text-sm font-medium text-charcoal-light hover:text-primary transition-colors"
+                              >
+                                {s.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-base font-medium text-charcoal-light hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}

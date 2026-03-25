@@ -11,32 +11,34 @@ import {
   Flame,
   CheckCircle2,
   MessageSquareQuote,
+  Mic,
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /* ─── Data ─────────────────────────────────── */
 
-const speechTypes = [
+const serviceTypes = [
   {
-    title: 'Wedding Speeches',
+    title: 'Wedding Celebrations & Speeches',
     description:
-      'Best man, maid of honour, father of the bride, or the happy couple — we will craft words that make them laugh, cry, and remember forever.',
+      'Mark is a registered marriage celebrant who performs beautiful wedding ceremonies. He also coaches best men, maids of honour, fathers of the bride, and the happy couple on speeches that make them laugh, cry, and remember forever.',
     icon: Heart,
     color: 'text-secondary',
     bg: 'bg-red-50',
   },
   {
-    title: 'Funeral Eulogies',
+    title: 'Funeral & Memorial Services',
     description:
-      'The hardest speech you will ever give deserves the most care. We will help you honour their memory with grace and authenticity.',
+      'As a registered funeral celebrant, Mark brings warmth, dignity, and authenticity to life celebrations. He also helps family and friends craft eulogies that honour memories with grace.',
     icon: Flower2,
     color: 'text-blue-600',
     bg: 'bg-blue-50',
   },
   {
-    title: 'Business Presentations',
+    title: 'Business Presentations & MC',
     description:
-      'Pitches, keynotes, award acceptances, AGM addresses — polished, persuasive, and unmistakably you.',
+      'With 35 years of broadcasting experience, Mark is an accomplished Master of Ceremonies for conferences, awards nights, and corporate events. He also coaches business presentations, pitches, and AGM addresses.',
     icon: Briefcase,
     color: 'text-primary',
     bg: 'bg-orange-50',
@@ -44,7 +46,7 @@ const speechTypes = [
   {
     title: 'Special Occasions',
     description:
-      'Retirements, milestones, roasts, farewells — whatever the occasion, we will make your words count.',
+      'Retirements, milestones, roasts, farewells — whatever the occasion, Mark can MC, celebrate, or coach you to make your words count.',
     icon: PartyPopper,
     color: 'text-accent',
     bg: 'bg-amber-50',
@@ -56,13 +58,13 @@ const processSteps = [
     step: '01',
     title: 'Consultation',
     description:
-      'We start with a conversation. Tell us about the person, the event, the tone you want, and any stories or memories you want to include.',
+      'We start with a conversation. Tell Mark about the person, the event, the tone you want, and any stories or memories you want to include.',
   },
   {
     step: '02',
-    title: 'First Draft',
+    title: 'Craft & Create',
     description:
-      'Our writers craft a speech that sounds like you — not a template, not generic, but genuinely your words elevated.',
+      'Whether Mark is performing the ceremony or coaching your speech, he crafts words that sound like you — not a template, not generic, but genuinely your story elevated.',
   },
   {
     step: '03',
@@ -74,7 +76,7 @@ const processSteps = [
     step: '04',
     title: 'Deliver With Confidence',
     description:
-      'Optional coaching session to help you rehearse, nail the timing, and feel completely confident on the day.',
+      'Optional coaching session to help you rehearse, nail the timing, and feel completely confident on the day — or let Mark deliver it himself.',
   },
 ];
 
@@ -99,7 +101,7 @@ export default function SpeechSaversPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-accent via-primary to-secondary opacity-95" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,transparent_30%,rgba(0,0,0,0.3)_100%)]" />
 
-        {/* Quill decorations */}
+        {/* Decorative circles */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute right-[10%] top-[15%] h-40 w-40 rounded-full border border-white/10"
@@ -121,7 +123,7 @@ export default function SpeechSaversPage() {
             className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-5 py-2 text-sm font-semibold text-white backdrop-blur-sm"
           >
             <PenTool className="h-4 w-4" />
-            Professional Speech Writing
+            Celebrant, MC &amp; Speech Coaching
           </motion.div>
 
           <motion.h1
@@ -139,7 +141,7 @@ export default function SpeechSaversPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            Your words, your story, beautifully crafted
+            Ceremonies performed. Speeches perfected.
           </motion.p>
 
           <motion.p
@@ -148,8 +150,10 @@ export default function SpeechSaversPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Life&apos;s biggest moments deserve words that match. We help you say what
-            you mean, mean what you say, and leave your audience moved.
+            Mark is a registered marriage and funeral celebrant, an experienced
+            Master of Ceremonies, and a speech coach. Whether you need someone to
+            lead the ceremony or help you nail your own words — life&apos;s biggest
+            moments deserve the best.
           </motion.p>
 
           <motion.div
@@ -162,15 +166,70 @@ export default function SpeechSaversPage() {
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-charcoal shadow-lg transition-transform hover:scale-105"
             >
-              Get a Quote
+              Get in Touch
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Speech Types ───────────────────────── */}
+      {/* ── Mark at Work ─────────────────────── */}
       <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid items-center gap-14 md:grid-cols-2">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden rounded-2xl shadow-xl"
+            >
+              <Image
+                src="/images/mark-event-selfie.webp"
+                alt="Mark Bunting MCing at an event"
+                width={600}
+                height={400}
+                unoptimized
+                className="h-auto w-full object-cover"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-4"
+            >
+              <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+                More Than a{' '}
+                <span className="text-gradient-fire">Speech Writer</span>
+              </h2>
+              <p className="text-lg leading-relaxed text-slate">
+                With 35 years of broadcasting experience, Mark doesn&apos;t just help
+                you write words — he performs ceremonies, MCs events, and coaches you
+                to deliver with confidence. He is a registered celebrant for both
+                weddings and funerals, bringing warmth, humour, and professionalism
+                to every occasion.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                {['Registered Celebrant', 'Master of Ceremonies', 'Speech Coach', '35 Years Broadcasting'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary"
+                  >
+                    <Mic className="h-3.5 w-3.5" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Service Types ────────────────────── */}
+      <section className="bg-warm-white py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-6">
           <motion.div
             className="mb-14 text-center"
@@ -180,11 +239,11 @@ export default function SpeechSaversPage() {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Speeches for Every{' '}
+              Services for Every{' '}
               <span className="text-gradient-fire">Occasion</span>
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-slate">
-              No matter the moment, we will help you find the perfect words.
+              Ceremonies, MC work, and speech coaching — no matter the moment.
             </p>
           </motion.div>
 
@@ -195,7 +254,7 @@ export default function SpeechSaversPage() {
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
           >
-            {speechTypes.map((type) => {
+            {serviceTypes.map((type) => {
               const Icon = type.icon;
               return (
                 <motion.div
@@ -223,7 +282,7 @@ export default function SpeechSaversPage() {
       </section>
 
       {/* ── How It Works ───────────────────────── */}
-      <section className="bg-warm-white py-20 md:py-28">
+      <section className="py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
             className="mb-16 text-center"
@@ -236,7 +295,7 @@ export default function SpeechSaversPage() {
               How It Works
             </h2>
             <p className="mt-3 text-slate">
-              Four simple steps from blank page to standing ovation.
+              Four simple steps from first conversation to perfect delivery.
             </p>
           </motion.div>
 
@@ -274,7 +333,7 @@ export default function SpeechSaversPage() {
       </section>
 
       {/* ── Testimonial ────────────────────────── */}
-      <section className="py-20 md:py-28">
+      <section className="bg-warm-white py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-6">
           <motion.div
             className="relative rounded-2xl bg-white p-10 shadow-lg md:p-14"
@@ -314,8 +373,9 @@ export default function SpeechSaversPage() {
               Investment
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-gray-400">
-              Every speech is unique, so pricing depends on the scope, timeline, and
-              whether you want delivery coaching included. Here is a general guide:
+              Every occasion is unique, so pricing depends on the scope, timeline, and
+              whether you need a celebrant, MC, speech coaching, or a combination.
+              Here is a general guide:
             </p>
           </motion.div>
 
@@ -328,20 +388,20 @@ export default function SpeechSaversPage() {
           >
             {[
               {
-                tier: 'Essential',
-                description: 'Speech writing with one round of revisions',
-                features: ['Initial consultation', 'Custom-written speech', '1 revision round'],
+                tier: 'Speech Coaching',
+                description: 'Expert help writing and rehearsing your speech',
+                features: ['Initial consultation', 'Custom speech drafting', 'Revision rounds', 'Delivery coaching'],
               },
               {
-                tier: 'Premium',
-                description: 'Full writing service with unlimited revisions',
-                features: ['In-depth consultation', 'Custom-written speech', 'Unlimited revisions', 'Delivery tips guide'],
+                tier: 'Celebrant Services',
+                description: 'Mark performs your wedding or memorial ceremony',
+                features: ['Planning consultation', 'Personalised ceremony', 'Professional delivery', 'Coordination with venue'],
                 highlight: true,
               },
               {
-                tier: 'Complete',
-                description: 'Writing + delivery coaching to nail the performance',
-                features: ['Everything in Premium', '1-on-1 delivery coaching', 'Rehearsal session', 'Day-of support'],
+                tier: 'MC & Full Package',
+                description: 'Master of Ceremonies plus speech coaching combined',
+                features: ['Event MC services', 'Speech coaching included', 'Run sheet coordination', 'Day-of support'],
               },
             ].map((pkg) => (
               <motion.div
@@ -400,14 +460,14 @@ export default function SpeechSaversPage() {
             Your Moment Deserves the Right Words
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/80">
-            Do not leave it to chance. Get in touch and let&apos;s start crafting
-            a speech you will be proud to deliver.
+            Whether you need a celebrant, an MC, or a speech coach — get in touch
+            and let&apos;s make your occasion unforgettable.
           </p>
           <Link
             href="/contact"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-charcoal shadow-lg transition-transform hover:scale-105"
           >
-            Start Your Speech
+            Start the Conversation
             <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>

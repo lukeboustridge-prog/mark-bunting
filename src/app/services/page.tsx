@@ -7,9 +7,9 @@ import Link from 'next/link';
 const services = [
   {
     title: 'Find Your Fire',
-    subtitle: 'The Open Flames Framework',
+    subtitle: 'OPEN FLAME Communication Framework',
     description:
-      'Discover your unique communication flame type and learn how to harness it. Mark\'s signature framework helps individuals and teams understand how they naturally communicate — and how to do it better.',
+      'Discover your unique communication flame type using the OPEN FLAME techniques — a simpler, more visual alternative to DISC and Myers-Briggs. Used by the All Blacks, Chiefs, Crusaders, government agencies, schools, and corporates across New Zealand.',
     icon: Flame,
     href: '/services/find-your-fire',
     gradient: 'from-amber-400 via-primary to-secondary',
@@ -17,9 +17,9 @@ const services = [
   },
   {
     title: 'Spread Your Fire',
-    subtitle: 'Powerful Presenters Training',
+    subtitle: 'Presentation & Communication Training',
     description:
-      'Transform from a nervous speaker into a compelling presenter. Whether it\'s a boardroom pitch or a conference keynote, learn to own the stage and ignite your audience.',
+      'Transform how you communicate and present — whether on stage, in the boardroom, or on camera. Taught by a 35-year broadcaster who has coached All Blacks, Chiefs, and Crusaders players. Keynotes, team workshops, and 1-on-1 coaching.',
     icon: Mic,
     href: '/services/spread-your-fire',
     gradient: 'from-primary via-secondary to-red-700',
@@ -27,9 +27,9 @@ const services = [
   },
   {
     title: 'Speech Savers',
-    subtitle: 'Professional Speech Writing',
+    subtitle: 'Celebrant, MC & Speech Coaching',
     description:
-      'Your words, your story, beautifully crafted. From wedding toasts to eulogies, business presentations to special occasions — get expert help writing the speech of a lifetime.',
+      'Mark is a registered marriage and funeral celebrant, an experienced Master of Ceremonies, and a speech coach. From wedding ceremonies to conference MC work to coaching your best man speech — life\'s biggest moments deserve the best.',
     icon: PenTool,
     href: '/services/speech-savers',
     gradient: 'from-accent via-primary to-secondary',
@@ -71,7 +71,7 @@ export default function ServicesPage() {
             transition={{ duration: 0.6 }}
           >
             <span className="mb-4 inline-block rounded-full bg-primary/20 px-4 py-1.5 text-sm font-semibold tracking-wide text-primary">
-              What We Offer
+              What Mark Offers
             </span>
           </motion.div>
 
@@ -91,8 +91,8 @@ export default function ServicesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            From discovering your communication style to delivering show-stopping
-            presentations, Mark Bunting helps you find, fuel, and spread your fire.
+            Communications coaching, team building, keynote presentations, MC services,
+            and celebrant work. Mark Bunting helps you find, fuel, and spread your fire.
           </motion.p>
         </div>
       </section>

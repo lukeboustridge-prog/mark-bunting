@@ -15,6 +15,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /* ─── Data ─────────────────────────────────── */
 
@@ -31,7 +32,7 @@ const skillAreas = [
   },
   {
     title: 'Storytelling That Sticks',
-    description: 'Weave stories that make your message unforgettable. Facts tell, stories sell — and we will show you how.',
+    description: 'Weave stories that make your message unforgettable. Facts tell, stories sell — and Mark will show you how.',
     icon: Lightbulb,
   },
   {
@@ -59,12 +60,12 @@ const formats = [
   },
   {
     title: 'Team Workshops',
-    description: 'Interactive, hands-on training for teams who want to level up their presentation skills together.',
-    features: ['Half or full day', '8-30 participants', 'Live practice & feedback'],
+    description: 'Interactive, hands-on training for teams who want to level up their communication and presentation skills together.',
+    features: ['Half or full day', 'In person or online', 'Live practice & feedback'],
   },
   {
     title: '1-on-1 Coaching',
-    description: 'Personalised coaching for executives, TEDx speakers, or anyone preparing for a high-stakes presentation.',
+    description: 'Personalised coaching for executives, athletes, or anyone preparing for a high-stakes presentation.',
     features: ['Flexible scheduling', 'In-person or virtual', 'Tailored to your goal'],
   },
 ];
@@ -109,7 +110,7 @@ export default function SpreadYourFirePage() {
             className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/20 px-5 py-2 text-sm font-semibold text-primary"
           >
             <Mic className="h-4 w-4" />
-            Presentation Training
+            Presentation &amp; Communication Training
           </motion.div>
 
           <motion.h1
@@ -130,7 +131,9 @@ export default function SpreadYourFirePage() {
           >
             Become the kind of presenter people remember. Learn to captivate,
             persuade, and inspire — whether you are on stage, in the boardroom,
-            or on camera.
+            or on camera. Taught by a 35-year broadcaster and TV presenter who
+            has coached All Blacks, Chiefs, and Crusaders players on their
+            communication.
           </motion.p>
 
           <motion.div
@@ -150,11 +153,29 @@ export default function SpreadYourFirePage() {
         </div>
       </section>
 
-      {/* ── The Problem ────────────────────────── */}
+      {/* ── Why Mark ──────────────────────────── */}
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6">
           <div className="grid items-center gap-14 md:grid-cols-2">
-            {/* Stats side */}
+            {/* Image side */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative overflow-hidden rounded-2xl shadow-xl"
+            >
+              <Image
+                src="/images/mark-workshop-action.webp"
+                alt="Mark Bunting running an interactive communication workshop"
+                width={600}
+                height={400}
+                unoptimized
+                className="h-auto w-full object-cover"
+              />
+            </motion.div>
+
+            {/* Text side */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -167,46 +188,31 @@ export default function SpreadYourFirePage() {
                 variants={fadeUp}
                 custom={0}
               >
-                The Problem With{' '}
-                <span className="text-secondary">Public Speaking</span>
+                Why Learn From{' '}
+                <span className="text-secondary">Mark?</span>
               </motion.h2>
 
-              {[
-                { stat: '75%', label: 'of people experience glossophobia — the fear of public speaking' },
-                { stat: '70%', label: 'of employees say presentation skills are critical for career success' },
-                { stat: '8 sec', label: 'is the average audience attention span you need to capture' },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.stat}
-                  variants={fadeUp}
-                  custom={i + 1}
-                  className="flex items-start gap-4"
-                >
-                  <span className="shrink-0 text-3xl font-bold text-gradient-fire">
-                    {item.stat}
-                  </span>
-                  <p className="text-slate">{item.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+              <motion.p
+                className="text-lg leading-relaxed text-slate"
+                variants={fadeUp}
+                custom={1}
+              >
+                After 35 years as a broadcaster and TV presenter, Mark doesn&apos;t
+                just teach presenting — he <strong>knows</strong> presenting. He has
+                spent decades learning what connects with an audience and what falls flat.
+              </motion.p>
 
-            {/* Text side */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="rounded-2xl bg-white p-8 shadow-lg"
-            >
-              <p className="text-lg leading-relaxed text-charcoal">
-                Most people don&apos;t fear speaking — they fear being <strong>boring</strong>.
-                They fear the blank stares, the wandering eyes, the polite applause that
-                says &quot;thank goodness that&apos;s over.&quot;
-              </p>
-              <p className="mt-4 text-lg leading-relaxed text-charcoal">
-                It doesn&apos;t have to be that way. With the right training, anyone can
-                become a speaker who lights up the room.
-              </p>
+              <motion.p
+                className="text-lg leading-relaxed text-slate"
+                variants={fadeUp}
+                custom={2}
+              >
+                He has worked with All Blacks, Chiefs, and Crusaders players on their
+                communication skills, as well as NPC teams, government agencies, schools,
+                corporates, charities, and tradespeople. Whether it&apos;s a team of
+                five or a conference of five hundred, Mark brings the same energy, insight,
+                and practical know-how.
+              </motion.p>
             </motion.div>
           </div>
         </div>
@@ -223,15 +229,16 @@ export default function SpreadYourFirePage() {
             transition={{ duration: 0.5 }}
           >
             <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-              The Solution
+              The Approach
             </span>
             <h2 className="mt-4 text-3xl font-bold text-charcoal md:text-4xl">
-              Mark&apos;s Approach
+              Practical, Energetic, Real-World
             </h2>
             <p className="mt-4 text-lg text-slate">
-              Forget death-by-PowerPoint workshops. Mark&apos;s training is practical,
-              energetic, and built on real-world experience. You will be on your feet,
-              practising, and getting feedback from the very first session.
+              Forget death-by-PowerPoint workshops. Mark&apos;s training is built on
+              real-world broadcasting experience and his OPEN FLAME communication
+              techniques. You will be on your feet, practising, and getting feedback
+              from the very first session.
             </p>
           </motion.div>
         </div>
@@ -349,15 +356,18 @@ export default function SpreadYourFirePage() {
           >
             <MessageSquareQuote className="absolute -top-5 left-8 h-10 w-10 text-primary" />
             <blockquote className="text-lg italic leading-relaxed text-charcoal md:text-xl">
-              &quot;Before Mark&apos;s training, I dreaded every presentation. Now I actually
-              look forward to them. He didn&apos;t just teach me to speak — he taught me
-              to connect. The feedback from my team has been incredible.&quot;
+              &quot;It was perfectly pitched, insightful and connected really well
+              with the team. It definitely changed the vernacular in the group and
+              made the other tasks more interesting as we observed the different
+              coloured flames working together. Everyone rated the session really
+              highly, and the consensus was that it was one of the best sessions
+              we&apos;ve had.&quot;
             </blockquote>
             <div className="mt-6 flex items-center gap-4">
               <div className="h-12 w-12 rounded-full gradient-fire" />
               <div>
-                <p className="font-semibold text-charcoal">Sarah M.</p>
-                <p className="text-sm text-slate">Senior Manager, Auckland</p>
+                <p className="font-semibold text-charcoal">Workshop Participant</p>
+                <p className="text-sm text-slate">Team Communication Session</p>
               </div>
             </div>
           </motion.div>

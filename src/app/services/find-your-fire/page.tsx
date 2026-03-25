@@ -13,8 +13,15 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /* ─── Flame Type Data ──────────────────────── */
+/*
+ * NOTE: These flame descriptions are PLACEHOLDERS pending Mark's actual content.
+ * We know the flame colours (Red, Orange, Clear/Blue) exist from Mark's blog and
+ * sitemap, but the detailed traits and descriptions below are inferred and should
+ * be replaced with Mark's official definitions.
+ */
 
 const flameTypes = [
   {
@@ -53,7 +60,7 @@ const flameTypes = [
       'Lights up every room',
     ],
     description:
-      'Orange Flames are the glue that holds teams together. Their warmth and enthusiasm are contagious — people want to follow them.',
+      'Orange Flames are the glue that holds teams together. Their warmth and enthusiasm are contagious — an Orange Flame neeeeeds people, and people need them right back.',
   },
   {
     name: 'Clear / Blue Flame',
@@ -190,7 +197,7 @@ export default function FindYourFirePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            The Open Flames Framework
+            The OPEN FLAME Techniques
           </motion.p>
 
           <motion.p
@@ -199,9 +206,10 @@ export default function FindYourFirePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Everyone communicates differently. The Open Flames Framework reveals your
-            unique &quot;flame type&quot; — the natural communication style that drives how
-            you connect, lead, and inspire. Understanding it changes everything.
+            We don&apos;t all speak the same style. The OPEN FLAME techniques use
+            coloured flames to reveal your natural communication personality —
+            taking what works from DISC and Myers-Briggs and making it really
+            work for you and your team.
           </motion.p>
 
           <motion.div
@@ -230,32 +238,62 @@ export default function FindYourFirePage() {
       {/* ── What Are the Flames? ───────────────── */}
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6">
-          <motion.div
-            className="mx-auto max-w-3xl text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-          >
-            <motion.h2
-              className="text-3xl font-bold text-charcoal md:text-5xl"
-              variants={fadeUp}
-              custom={0}
+          <div className="grid items-center gap-12 md:grid-cols-2">
+            <motion.div
+              className="mx-auto max-w-xl"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={stagger}
             >
-              What Are the{' '}
-              <span className="text-gradient-fire">Flames</span>?
-            </motion.h2>
-            <motion.p
-              className="mt-6 text-lg leading-relaxed text-slate"
-              variants={fadeUp}
-              custom={1}
+              <motion.h2
+                className="text-3xl font-bold text-charcoal md:text-5xl"
+                variants={fadeUp}
+                custom={0}
+              >
+                What Are the{' '}
+                <span className="text-gradient-fire">OPEN FLAME Techniques</span>?
+              </motion.h2>
+              <motion.p
+                className="mt-6 text-lg leading-relaxed text-slate"
+                variants={fadeUp}
+                custom={1}
+              >
+                The OPEN FLAME techniques are built on a simple truth: we don&apos;t all
+                speak the same style. Your flame type shapes how you think, how you speak,
+                and how others experience you. It takes what works from frameworks like
+                DISC and Myers-Briggs and makes them simpler, more visual, and far more
+                practical for everyday use.
+              </motion.p>
+              <motion.p
+                className="mt-4 text-lg leading-relaxed text-slate"
+                variants={fadeUp}
+                custom={2}
+              >
+                There is no &quot;best&quot; flame — each one has unique strengths.
+                The magic happens when you understand yours and learn to read everyone
+                else&apos;s. Used by the All Blacks, Chiefs, Crusaders, government
+                agencies, schools, corporates, and tradespeople across New Zealand.
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative overflow-hidden rounded-2xl shadow-xl"
             >
-              The Open Flames Framework is built on a simple truth: we all burn differently.
-              Your flame type shapes how you think, how you speak, and how others experience you.
-              There is no &quot;best&quot; flame — each one has unique strengths. The magic happens
-              when you understand yours and learn to read everyone else&apos;s.
-            </motion.p>
-          </motion.div>
+              <Image
+                src="/images/mark-presenting.jpg"
+                alt="Mark Bunting presenting the OPEN FLAME techniques with coloured flames on screen"
+                width={600}
+                height={400}
+                unoptimized
+                className="h-auto w-full object-cover"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -335,6 +373,24 @@ export default function FindYourFirePage() {
             })}
           </motion.div>
 
+          {/* Audience image */}
+          <motion.div
+            className="mt-14 overflow-hidden rounded-2xl shadow-xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <Image
+              src="/images/mark-audience-laughing.webp"
+              alt="Engaged audience laughing during an OPEN FLAME techniques session"
+              width={1200}
+              height={500}
+              unoptimized
+              className="h-auto w-full object-cover"
+            />
+          </motion.div>
+
           {/* Teaser */}
           <motion.p
             className="mt-10 text-center text-sm italic text-slate"
@@ -362,8 +418,8 @@ export default function FindYourFirePage() {
               How It Works
             </h2>
             <p className="mt-3 max-w-xl mx-auto text-slate">
-              Whether it&apos;s a half-day workshop or a full team programme, here&apos;s
-              the journey.
+              Whether it&apos;s a half-day workshop, a keynote presentation,
+              or a full team programme — in person or online — here&apos;s the journey.
             </p>
           </motion.div>
 
@@ -420,8 +476,8 @@ export default function FindYourFirePage() {
             Ready to Find Your Fire?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-gray-300">
-            Take the flame quiz online, or bring the full Open Flames experience to
-            your team with a live workshop.
+            Take the flame quiz online, or bring the full OPEN FLAME experience to
+            your team with a live workshop or keynote presentation.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link

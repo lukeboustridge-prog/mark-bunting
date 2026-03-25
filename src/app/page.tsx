@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   motion,
   useInView,
@@ -22,6 +23,10 @@ import {
   Mail,
   BookOpen,
   ChevronRight,
+  Phone,
+  MapPin,
+  GraduationCap,
+  Heart,
 } from 'lucide-react';
 
 /* ──────────────────────────────────────────────
@@ -88,6 +93,7 @@ export default function HomePage() {
     <main className="overflow-hidden">
       <Hero />
       <Benefits />
+      <About />
       <Services />
       <QuizCTA />
       <Testimonials />
@@ -105,33 +111,21 @@ export default function HomePage() {
 function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Warm gradient background */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            'linear-gradient(160deg, #FFF7ED 0%, #FFEDD5 25%, #FED7AA 50%, #FDBA74 75%, #FB923C 100%)',
-        }}
-      />
+      {/* Background image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/mark-event-selfie.webp"
+          alt="Mark Bunting taking a selfie with over 100 people at a dinner event"
+          fill
+          className="object-cover"
+          priority
+          unoptimized
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/80" />
+      </div>
 
       {/* Decorative flame shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
-        {/* Large flame blob top-right */}
-        <div
-          className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl"
-          style={{
-            background:
-              'radial-gradient(circle, #F97316 0%, #DC2626 60%, transparent 70%)',
-          }}
-        />
-        {/* Ember glow bottom-left */}
-        <div
-          className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full opacity-20 blur-3xl"
-          style={{
-            background:
-              'radial-gradient(circle, #F59E0B 0%, #F97316 50%, transparent 70%)',
-          }}
-        />
         {/* Small sparks */}
         <motion.div
           className="absolute top-1/4 left-[15%] w-3 h-3 rounded-full bg-amber"
@@ -153,24 +147,6 @@ function Hero() {
           animate={{ y: [-12, 8, -12], opacity: [0.3, 0.8, 0.3] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
-
-        {/* Flame-shaped decorative element */}
-        <div
-          className="absolute top-[10%] right-[8%] w-24 h-40 opacity-15"
-          style={{
-            background: 'linear-gradient(to top, #F97316, #F59E0B, transparent)',
-            borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%',
-            transform: 'rotate(-15deg)',
-          }}
-        />
-        <div
-          className="absolute bottom-[15%] left-[5%] w-16 h-28 opacity-10"
-          style={{
-            background: 'linear-gradient(to top, #DC2626, #F97316, transparent)',
-            borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%',
-            transform: 'rotate(20deg)',
-          }}
-        />
       </div>
 
       {/* Content */}
@@ -179,21 +155,21 @@ function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm rounded-full px-5 py-2 mb-8 text-sm font-medium text-charcoal"
+          className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-5 py-2 mb-8 text-sm font-medium text-white"
         >
           <Flame className="w-4 h-4 text-flame" />
-          Mark Bunting Human Communications
+          Igniter, Delighter &amp; Internal Fire Lighter
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-charcoal mb-6 leading-[1.1]"
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
         >
-          I Teach People to{' '}
+          Making NZ a{' '}
           <span className="text-gradient-fire inline-block">
-            Get On With Each Other
+            Friendlier Place
           </span>
         </motion.h1>
 
@@ -201,10 +177,10 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-          className="text-xl sm:text-2xl text-charcoal-light max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-xl sm:text-2xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Transforming how people communicate in the workplace and in life
-          &mdash; with warmth, humour, and proven frameworks that stick.
+          Person by person, team by team, business by business &mdash;
+          with warmth, humour, and OPEN FLAME techniques that stick.
         </motion.p>
 
         <motion.div
@@ -222,7 +198,7 @@ function Hero() {
           </Link>
           <Link
             href="#services"
-            className="inline-flex items-center justify-center gap-2 border-2 border-charcoal/20 hover:border-flame text-charcoal hover:text-flame font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:-translate-y-0.5 bg-white/40 backdrop-blur-sm"
+            className="inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:border-flame text-white hover:text-flame font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:-translate-y-0.5 bg-white/10 backdrop-blur-sm"
           >
             Explore Services
             <ArrowRight className="w-5 h-5" />
@@ -239,7 +215,7 @@ function Hero() {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-6 h-10 rounded-full border-2 border-charcoal/20 flex items-start justify-center p-1.5"
+            className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-1.5"
           >
             <motion.div className="w-1.5 h-3 rounded-full bg-flame" />
           </motion.div>
@@ -258,15 +234,15 @@ const benefits = [
     icon: Users,
     title: 'Stronger Teams',
     description:
-      'Build workplace relationships that drive collaboration, trust, and results. When your people communicate well, everything else falls into place.',
+      'We don\'t all speak the same style. OPEN FLAME techniques help your team understand each other\'s communication styles and work together better than ever.',
     color: 'text-flame',
     bg: 'bg-flame/10',
   },
   {
     icon: Presentation,
-    title: 'Confident Speakers',
+    title: 'Confident Communicators',
     description:
-      "Present with power and presence. Whether it's a boardroom pitch or a keynote stage, learn to own the room and move your audience.",
+      'A simpler alternative to DISC and Myers-Briggs that makes personality frameworks really work for you and your team. Coloured flames, not complicated charts.',
     color: 'text-ember',
     bg: 'bg-ember/10',
   },
@@ -274,7 +250,7 @@ const benefits = [
     icon: MessageCircleHeart,
     title: 'Deeper Connections',
     description:
-      'Understand yourself and others at a deeper level. Discover communication styles and bridge the gaps that cause friction and misunderstanding.',
+      'From corporate boardrooms to school classrooms, from All Blacks to government departments \u2014 the same human truths apply. Learn them with warmth and humour.',
     color: 'text-amber',
     bg: 'bg-amber/10',
   },
@@ -313,7 +289,7 @@ function Benefits() {
             className="text-lg text-slate max-w-2xl mx-auto"
           >
             Most people have never been taught how to truly connect. Mark&apos;s
-            training unlocks the skills you didn&apos;t know you were missing.
+            OPEN FLAME techniques unlock the skills you didn&apos;t know you were missing.
           </motion.p>
         </motion.div>
 
@@ -345,6 +321,109 @@ function Benefits() {
 }
 
 /* ──────────────────────────────────────────────
+   2b. ABOUT MARK
+   ────────────────────────────────────────────── */
+
+function About() {
+  const { ref, inView } = useAnimateOnScroll();
+
+  return (
+    <section ref={ref} id="about" className="py-24 bg-warm-white">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="grid lg:grid-cols-2 gap-12 items-center"
+        >
+          {/* Image side */}
+          <motion.div variants={scaleIn} custom={0} className="relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/images/mark-portrait-bw.png"
+                alt="Mark Bunting - broadcaster, communicator and trainer"
+                width={600}
+                height={750}
+                className="w-full h-auto"
+                unoptimized
+              />
+            </div>
+            {/* Floating credential badges */}
+            <motion.div
+              variants={fadeUp}
+              custom={2}
+              className="absolute -bottom-4 -right-4 bg-white rounded-xl p-4 shadow-lg border border-warm-gray/50"
+            >
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-5 h-5 text-flame" />
+                <div>
+                  <p className="text-sm font-bold text-charcoal">B.Ed, Dip Tchg</p>
+                  <p className="text-xs text-slate">35 Years Broadcasting</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Text side */}
+          <div>
+            <motion.p
+              variants={fadeUp}
+              custom={0}
+              className="text-flame font-semibold uppercase tracking-wider text-sm mb-3"
+            >
+              Meet Mark
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              custom={1}
+              className="text-4xl sm:text-5xl font-bold text-charcoal mb-6"
+            >
+              35 Years of Making People{' '}
+              <span className="text-gradient-fire">Get Along</span>
+            </motion.h2>
+            <motion.div variants={fadeUp} custom={2} className="space-y-4 text-slate leading-relaxed">
+              <p>
+                Mark Bunting is a multi-award winning nationwide broadcaster with
+                35 years in radio, a former TV presenter, and a two-term Hamilton
+                City Councillor (top-polling both times) who chaired the community committee.
+              </p>
+              <p>
+                He&apos;s worked with the All Blacks, Chiefs, Crusaders, NPC rugby
+                teams, and international sports teams. He delivers OPEN FLAME
+                communication training to corporates, government departments, and
+                schools across New Zealand &mdash; both in person and online.
+              </p>
+              <p>
+                Mark is also a marriage and funeral celebrant and MC, bringing
+                the same warmth and connection to life&apos;s biggest moments.
+                Based in Hamilton, his mission is simple: making NZ a friendlier
+                place, person by person, team by team, business by business.
+              </p>
+            </motion.div>
+            <motion.div variants={fadeUp} custom={3} className="mt-8 flex flex-wrap gap-3">
+              {[
+                'Broadcaster',
+                'TV Presenter',
+                'City Councillor',
+                'Celebrant & MC',
+                'Corporate Trainer',
+                'School Programmes',
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-4 py-1.5 rounded-full bg-flame/10 text-flame text-sm font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────
    3. SERVICES
    ────────────────────────────────────────────── */
 
@@ -352,9 +431,9 @@ const services = [
   {
     icon: Flame,
     title: 'Find Your Fire',
-    subtitle: 'The Open Flames Framework',
+    subtitle: 'OPEN FLAME Techniques',
     description:
-      'Discover your communication flame type and learn how different styles interact. A powerful tool for teams and individuals to unlock better understanding.',
+      'Discover your communication flame colour and learn how different styles interact. A simpler, more powerful alternative to DISC and Myers-Briggs that makes personality frameworks really work for your team.',
     href: '/services/find-your-fire',
     accent: 'flame' as const,
   },
@@ -372,7 +451,7 @@ const services = [
     title: 'Speech Savers',
     subtitle: 'Professional Speech Writing',
     description:
-      'Weddings, funerals, business keynotes — get a professionally crafted speech that sounds like you, only better. Your words, polished to perfection.',
+      'Weddings, funerals, business keynotes \u2014 get a professionally crafted speech that sounds like you, only better. Your words, polished to perfection.',
     href: '/services/speech-savers',
     accent: 'amber' as const,
   },
@@ -437,6 +516,24 @@ function Services() {
             Whether you want to understand people better, present like a pro, or
             nail that big speech &mdash; there&apos;s a path for you.
           </motion.p>
+        </motion.div>
+
+        {/* Workshop photo banner */}
+        <motion.div
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="mb-12 rounded-2xl overflow-hidden shadow-lg"
+        >
+          <motion.div variants={fadeUp} custom={0}>
+            <Image
+              src="/images/mark-workshop-action.webp"
+              alt="Mark Bunting presenting an OPEN FLAME workshop"
+              width={1200}
+              height={500}
+              className="w-full h-64 object-cover"
+              unoptimized
+            />
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -539,7 +636,7 @@ function QuizCTA() {
           className="text-4xl sm:text-5xl font-bold text-white mb-6"
         >
           Discover Your{' '}
-          <span className="text-gradient-fire">Flame Type</span>
+          <span className="text-gradient-fire">Flame Colour</span>
         </motion.h2>
 
         <motion.p
@@ -547,10 +644,11 @@ function QuizCTA() {
           custom={2}
           className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          What kind of communicator are you? Take the{' '}
+          We don&apos;t all speak the same style. Take the{' '}
           <strong className="text-amber">15 Fast Flames</strong> quiz and
-          uncover your unique communication style in under 5 minutes. It&apos;s
-          fast, fun, and surprisingly revealing.
+          discover your unique communication colour in under 5 minutes. It&apos;s
+          fast, fun, and surprisingly revealing &mdash; a simpler alternative to
+          DISC and Myers-Briggs that actually works.
         </motion.p>
 
         <motion.div variants={fadeUp} custom={3}>
@@ -574,32 +672,36 @@ function QuizCTA() {
 
 const testimonials = [
   {
-    name: 'Sarah T.',
-    role: 'Team Leader',
+    name: 'Workshop Participant',
+    role: 'Team Session Feedback',
     quote:
-      "Mark completely changed how our team communicates. The Flames framework gave us a common language, and the laughs along the way made it unforgettable. Our meetings are actually productive now!",
+      'It was perfectly pitched, insightful and connected really well with the team. It definitely changed the vernacular in the group and made the other tasks more interesting as we observed the different coloured flames working together. Everyone rated the session really highly, and the consensus was that it was one of the best sessions we\'ve had.',
     stars: 5,
+    isReal: true,
   },
   {
-    name: 'James R.',
-    role: 'CEO',
+    name: 'Rachel M.',
+    role: 'HR Manager (placeholder)',
     quote:
-      "I've sat through dozens of communication workshops. Mark's is the only one where people were still talking about it months later. He's the real deal — entertaining, insightful, and genuinely transformative.",
+      'We brought Mark in for a team day and people are still referencing their flame colours months later. It gave us a shared language that actually stuck. The best investment we\'ve made in team culture this year.',
     stars: 5,
+    isReal: false,
   },
   {
-    name: 'Michelle K.',
-    role: 'Teacher',
+    name: 'Tom W.',
+    role: 'School Principal (placeholder)',
     quote:
-      "The Powerful Presenters course gave me confidence I never thought I'd have. I went from dreading parent evenings to actually looking forward to them. Mark makes you feel like you can do anything.",
+      'Mark had our staff in stitches while teaching them something genuinely useful. The teachers went back to their classrooms and started applying it with students straight away. We\'ve rebooked him for next term.',
     stars: 5,
+    isReal: false,
   },
   {
-    name: 'David L.',
-    role: 'Sales Manager',
+    name: 'Karen P.',
+    role: 'Business Owner (placeholder)',
     quote:
-      "My team's close rate went up 30% after Mark's training. Turns out, selling is really just communicating well. Who knew? Well, Mark knew. And now we all do.",
+      'I\'ve done DISC, Myers-Briggs, all the usual. Mark\'s OPEN FLAME approach is the first one my team actually remembers and uses day to day. It\'s simpler and it works better.',
     stars: 5,
+    isReal: false,
   },
 ];
 
@@ -631,6 +733,44 @@ function Testimonials() {
           </motion.h2>
         </motion.div>
 
+        {/* Workshop photos row */}
+        <motion.div
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12"
+        >
+          <motion.div variants={scaleIn} custom={0} className="rounded-xl overflow-hidden shadow-md">
+            <Image
+              src="/images/mark-audience-laughing.webp"
+              alt="Workshop audience laughing during Mark's presentation at a marae"
+              width={400}
+              height={300}
+              className="w-full h-48 object-cover"
+              unoptimized
+            />
+          </motion.div>
+          <motion.div variants={scaleIn} custom={1} className="rounded-xl overflow-hidden shadow-md">
+            <Image
+              src="/images/mark-group-photo.webp"
+              alt="Post-workshop group photo with Open Flames branding"
+              width={400}
+              height={300}
+              className="w-full h-48 object-cover"
+              unoptimized
+            />
+          </motion.div>
+          <motion.div variants={scaleIn} custom={2} className="rounded-xl overflow-hidden shadow-md hidden md:block">
+            <Image
+              src="/images/mark-school-workshop.webp"
+              alt="Mark's fun workshop session with teachers"
+              width={400}
+              height={300}
+              className="w-full h-48 object-cover"
+              unoptimized
+            />
+          </motion.div>
+        </motion.div>
+
         <motion.div
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -641,7 +781,9 @@ function Testimonials() {
               key={t.name}
               variants={scaleIn}
               custom={i}
-              className="relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-warm-gray/50"
+              className={`relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-warm-gray/50 ${
+                t.isReal ? 'ring-2 ring-flame/20' : ''
+              }`}
             >
               {/* Quote mark */}
               <Quote className="absolute top-6 right-6 w-8 h-8 text-flame/15" />
@@ -798,7 +940,7 @@ function LatestContent() {
                       Latest Video
                     </p>
                     <p className="text-white text-sm font-semibold">
-                      Communication Tips That Actually Work
+                      OPEN FLAME Techniques in Action
                     </p>
                   </div>
                 </div>
@@ -809,7 +951,7 @@ function LatestContent() {
               custom={2}
               className="mt-4 space-y-3"
             >
-              {['Why Teams Fail (And How to Fix It)', 'The Art of the Apology'].map(
+              {['Understanding Your Flame Colour', 'The Art of the Apology'].map(
                 (title) => (
                   <Link
                     key={title}
@@ -889,24 +1031,56 @@ function Podcast() {
                 custom={1}
                 className="text-3xl sm:text-4xl font-bold text-charcoal mb-4"
               >
-                Conversations That{' '}
-                <span className="text-gradient-fire">Matter</span>
+                The Mark Bunting{' '}
+                <span className="text-gradient-fire">Podcast</span>
               </motion.h2>
               <motion.p
                 variants={fadeUp}
                 custom={2}
-                className="text-slate leading-relaxed mb-6"
+                className="text-slate leading-relaxed mb-4"
               >
-                Join Mark for candid conversations about communication,
-                connection, and everything in between. Real stories, practical
-                tips, and the occasional laugh &mdash; because learning should
-                never be boring.
+                29 episodes covering OPEN FLAME techniques, business communication,
+                and life. Featuring segments like &ldquo;Cliff X Face&rdquo;,
+                &ldquo;Rich by 60&rdquo;, and &ldquo;TWUTPOR&rdquo; &mdash;
+                real stories, practical tips, and the occasional motorcycle tangent.
               </motion.p>
+
+              {/* Podcast platforms */}
+              <motion.div
+                variants={fadeUp}
+                custom={3}
+                className="flex flex-wrap gap-3 mb-6"
+              >
+                <a
+                  href="https://podcasts.apple.com/nz/podcast/the-mark-bunting-podcast/id1648406702"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-warm-gray rounded-full px-4 py-2 text-sm font-medium text-charcoal hover:bg-flame/10 hover:text-flame transition-colors duration-300"
+                >
+                  Apple Podcasts
+                </a>
+                <a
+                  href="https://open.spotify.com/show/5JMnvS1LTDnMHEG55CCplm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-warm-gray rounded-full px-4 py-2 text-sm font-medium text-charcoal hover:bg-flame/10 hover:text-flame transition-colors duration-300"
+                >
+                  Spotify
+                </a>
+                <a
+                  href="https://bunty6.podbean.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-warm-gray rounded-full px-4 py-2 text-sm font-medium text-charcoal hover:bg-flame/10 hover:text-flame transition-colors duration-300"
+                >
+                  Podbean
+                </a>
+              </motion.div>
 
               {/* Placeholder player */}
               <motion.div
                 variants={fadeUp}
-                custom={3}
+                custom={4}
                 className="bg-warm-gray rounded-xl p-4 mb-6"
               >
                 <div className="flex items-center gap-4">
@@ -918,7 +1092,7 @@ function Podcast() {
                   </button>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-charcoal truncate">
-                      Latest Episode: The Listening Trap
+                      Latest Episode: Cliff X Face
                     </p>
                     <div className="mt-2 h-1.5 bg-white rounded-full overflow-hidden">
                       <div className="w-1/3 h-full bg-gradient-to-r from-flame to-amber rounded-full" />
@@ -928,13 +1102,13 @@ function Podcast() {
                 </div>
               </motion.div>
 
-              <motion.div variants={fadeUp} custom={4}>
+              <motion.div variants={fadeUp} custom={5}>
                 <Link
                   href="/podcast"
                   className="inline-flex items-center gap-2 text-flame font-semibold hover:gap-3 transition-all duration-300"
                 >
                   <Headphones className="w-4 h-4" />
-                  All Episodes
+                  All 29 Episodes
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
@@ -955,14 +1129,23 @@ function ContactCTA() {
 
   return (
     <section ref={ref} className="relative py-28 overflow-hidden">
-      {/* Warm gradient background */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            'linear-gradient(135deg, #FFEDD5 0%, #FED7AA 30%, #FDBA74 60%, #FB923C 100%)',
-        }}
-      />
+      {/* Background with presenting image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/mark-presenting.jpg"
+          alt="Mark Bunting presenting a workshop"
+          fill
+          className="object-cover"
+          unoptimized
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(255,237,213,0.92) 0%, rgba(254,215,170,0.88) 30%, rgba(253,186,116,0.85) 60%, rgba(251,146,60,0.9) 100%)',
+          }}
+        />
+      </div>
 
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
@@ -992,12 +1175,33 @@ function ContactCTA() {
         <motion.p
           variants={fadeUp}
           custom={1}
-          className="text-xl text-charcoal-light max-w-xl mx-auto mb-10 leading-relaxed"
+          className="text-xl text-charcoal-light max-w-xl mx-auto mb-8 leading-relaxed"
         >
-          Whether you need a keynote speaker, a team workshop, or a speech
-          that&apos;ll bring the house down &mdash; let&apos;s talk.
+          Whether you need a keynote speaker, a team workshop, school training,
+          or a celebrant who&apos;ll bring warmth and connection &mdash; let&apos;s talk.
         </motion.p>
-        <motion.div variants={fadeUp} custom={2}>
+
+        {/* Contact details */}
+        <motion.div
+          variants={fadeUp}
+          custom={2}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10 text-charcoal-light"
+        >
+          <a
+            href="tel:0274961699"
+            className="inline-flex items-center gap-2 hover:text-flame transition-colors duration-300"
+          >
+            <Phone className="w-4 h-4" />
+            027 496 1699
+          </a>
+          <span className="hidden sm:inline text-charcoal/20">|</span>
+          <span className="inline-flex items-center gap-2">
+            <MapPin className="w-4 h-4" />
+            Hamilton, Waikato
+          </span>
+        </motion.div>
+
+        <motion.div variants={fadeUp} custom={3} className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/contact"
             className="inline-flex items-center justify-center gap-2.5 bg-charcoal hover:bg-charcoal-light text-white font-bold px-10 py-5 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
@@ -1005,6 +1209,56 @@ function ContactCTA() {
             <Mail className="w-5 h-5" />
             Get in Touch
           </Link>
+          <a
+            href="tel:0274961699"
+            className="inline-flex items-center justify-center gap-2.5 border-2 border-charcoal/20 hover:border-flame text-charcoal hover:text-flame font-bold px-10 py-5 rounded-full text-lg transition-all duration-300 hover:-translate-y-0.5 bg-white/40 backdrop-blur-sm"
+          >
+            <Phone className="w-5 h-5" />
+            Call Mark
+          </a>
+        </motion.div>
+
+        {/* Social links */}
+        <motion.div
+          variants={fadeUp}
+          custom={4}
+          className="mt-8 flex items-center justify-center gap-4"
+        >
+          <a
+            href="https://www.facebook.com/p/Mark-Bunting-Open-Communications-100063785227789/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-charcoal/50 hover:text-flame transition-colors duration-300 text-sm font-medium"
+          >
+            Facebook
+          </a>
+          <span className="text-charcoal/20">|</span>
+          <a
+            href="https://www.instagram.com/markbunting_opencommunications/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-charcoal/50 hover:text-flame transition-colors duration-300 text-sm font-medium"
+          >
+            Instagram
+          </a>
+          <span className="text-charcoal/20">|</span>
+          <a
+            href="https://www.linkedin.com/in/mark-bunting-121a8a37/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-charcoal/50 hover:text-flame transition-colors duration-300 text-sm font-medium"
+          >
+            LinkedIn
+          </a>
+          <span className="text-charcoal/20">|</span>
+          <a
+            href="https://bunty6.podbean.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-charcoal/50 hover:text-flame transition-colors duration-300 text-sm font-medium"
+          >
+            Podcast
+          </a>
         </motion.div>
       </motion.div>
     </section>
