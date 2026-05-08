@@ -5,17 +5,24 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Flame, ChevronDown } from "lucide-react";
 
+const FAST_FLAMES_URL = "https://markbunting.coxy.nz/fastflames/";
+
 const serviceLinks = [
   { href: "/services/find-your-fire", label: "Find Your Fire" },
   { href: "/services/spread-your-fire", label: "Spread Your Fire" },
-  { href: "/services/speech-savers", label: "Speech Savers" },
+  { href: "/services/hire-your-fire", label: "Hire Your Fire" },
 ];
 
-const navLinks = [
+const navLinks: Array<{
+  href: string;
+  label: string;
+  hasDropdown?: boolean;
+  external?: boolean;
+}> = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services", hasDropdown: true },
-  { href: "/quiz", label: "Quiz" },
+  { href: FAST_FLAMES_URL, label: "Quiz", external: true },
   { href: "/blog", label: "Blog" },
   { href: "/podcast", label: "Podcast" },
   { href: "/contact", label: "Contact" },
@@ -77,6 +84,16 @@ export default function Header() {
                   )}
                 </AnimatePresence>
               </div>
+            ) : link.external ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-charcoal-light hover:text-primary transition-colors"
+              >
+                {link.label}
+              </a>
             ) : (
               <Link
                 key={link.href}
@@ -157,6 +174,17 @@ export default function Header() {
                       )}
                     </AnimatePresence>
                   </div>
+                ) : link.external ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                    className="text-base font-medium text-charcoal-light hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
                 ) : (
                   <Link
                     key={link.href}

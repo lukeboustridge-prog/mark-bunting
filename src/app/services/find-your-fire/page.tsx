@@ -11,41 +11,24 @@ import {
   Target,
   Lightbulb,
   CheckCircle2,
+  Leaf,
 } from 'lucide-react';
+
+const FAST_FLAMES_URL = 'https://markbunting.coxy.nz/fastflames/';
 import Link from 'next/link';
 import Image from 'next/image';
 
 /* ─── Flame Type Data ──────────────────────── */
-/*
- * NOTE: These flame descriptions are PLACEHOLDERS pending Mark's actual content.
- * We know the flame colours (Red, Orange, Clear/Blue) exist from Mark's blog and
- * sitemap, but the detailed traits and descriptions below are inferred and should
- * be replaced with Mark's official definitions.
+/* Sourced from markbunting.co.nz/open-flames and the four flame pages.
+ * Based on Jungian psychology — everyone burns all four colours to differing
+ * degrees. There is no "best" flame; the magic is recognising your own and
+ * reading everyone else's.
  */
 
 const flameTypes = [
   {
-    name: 'Red Flame',
-    tagline: 'The Driver',
-    color: 'bg-red-600',
-    lightBg: 'bg-red-50',
-    textColor: 'text-red-600',
-    borderColor: 'border-red-200',
-    glowColor: 'shadow-red-200/60',
-    icon: Zap,
-    traits: [
-      'Bold and direct communicator',
-      'Action-oriented — moves fast',
-      'Natural-born leader',
-      'Thrives under pressure',
-      'Cuts through the noise',
-    ],
-    description:
-      'Red Flames charge ahead. They are decisive, confident, and results-driven. In a room full of talkers, they are the ones who get things done.',
-  },
-  {
     name: 'Orange Flame',
-    tagline: 'The Connector',
+    tagline: 'The Optimist — Fun',
     color: 'bg-primary',
     lightBg: 'bg-orange-50',
     textColor: 'text-primary',
@@ -53,33 +36,71 @@ const flameTypes = [
     glowColor: 'shadow-orange-200/60',
     icon: Users,
     traits: [
-      'Warm and people-oriented',
-      'Energised by social connection',
-      'Naturally persuasive',
-      'Creates team cohesion',
-      'Lights up every room',
+      'Big-picture thinker',
+      'Talkative and creative',
+      'Warm, fun and infectious',
+      'Energised by people',
+      'Natural people-pleaser',
     ],
     description:
-      'Orange Flames are the glue that holds teams together. Their warmth and enthusiasm are contagious — an Orange Flame neeeeeds people, and people need them right back.',
+      'Orange Flames are the optimists — big-picture thinkers who are talkative, fun, creative and people-loving. They light up the room and lift the energy of the people around them.',
   },
   {
-    name: 'Clear / Blue Flame',
-    tagline: 'The Analyst',
+    name: 'Clear Flame',
+    tagline: 'The Precisionist — Perfection',
+    color: 'bg-sky-500',
+    lightBg: 'bg-sky-50',
+    textColor: 'text-sky-600',
+    borderColor: 'border-sky-200',
+    glowColor: 'shadow-sky-200/60',
+    icon: Search,
+    traits: [
+      'Detail-oriented and accurate',
+      'Punctual and tidy',
+      'Notices what others miss',
+      'Values structure and process',
+      'Brings clarity to complexity',
+    ],
+    description:
+      'Clear Flames are the precisionists — detail-oriented people who value accuracy, punctuality, tidiness and process. If anyone’s going to spot the spelling error or fix the spreadsheet, it’s a Clear.',
+  },
+  {
+    name: 'Red Flame',
+    tagline: 'The Efficient — Efficiency',
+    color: 'bg-red-600',
+    lightBg: 'bg-red-50',
+    textColor: 'text-red-600',
+    borderColor: 'border-red-200',
+    glowColor: 'shadow-red-200/60',
+    icon: Zap,
+    traits: [
+      'Logical and clear-thinking',
+      'No-nonsense communicator',
+      'Gets straight to the point',
+      'Results-driven',
+      'Doesn’t muck about',
+    ],
+    description:
+      'Red Flames are the efficients — logical, intelligent people who get straight to the point and always get the job done. Red doesn’t muck about.',
+  },
+  {
+    name: 'Blue Flame',
+    tagline: 'The Natural — Peace',
     color: 'bg-blue-600',
     lightBg: 'bg-blue-50',
     textColor: 'text-blue-600',
     borderColor: 'border-blue-200',
     glowColor: 'shadow-blue-200/60',
-    icon: Search,
+    icon: Leaf,
     traits: [
-      'Analytical and precise',
-      'Detail-oriented thinker',
-      'Values accuracy and data',
-      'Calm under complexity',
-      'The voice of reason',
+      'Sensory and intuitive',
+      'Reads the vibe in the room',
+      'Despises conflict',
+      'Prioritises harmony',
+      'Needs space to feel things through',
     ],
     description:
-      'Clear Flames burn with quiet intensity. They see what others miss, bring clarity to chaos, and their precision is their superpower.',
+      'Blue Flames are the naturals — sensory people who need to feel things in order to do them well. They prize a happy environment, hate conflict, and often hear what people aren’t saying.',
   },
 ];
 
@@ -218,13 +239,15 @@ export default function FindYourFirePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55 }}
           >
-            <Link
-              href="/quiz"
+            <a
+              href={FAST_FLAMES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-charcoal shadow-lg transition-transform hover:scale-105"
             >
               <Flame className="h-5 w-5 text-primary" />
               Take the Quiz
-            </Link>
+            </a>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full border-2 border-white/50 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
@@ -316,7 +339,7 @@ export default function FindYourFirePage() {
           </motion.div>
 
           <motion.div
-            className="grid gap-8 md:grid-cols-3"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
             variants={stagger}
             initial="hidden"
             whileInView="visible"
@@ -480,13 +503,15 @@ export default function FindYourFirePage() {
             your team with a live workshop or keynote presentation.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/quiz"
+            <a
+              href={FAST_FLAMES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 font-semibold text-white shadow-lg transition-colors hover:bg-primary-dark"
             >
               <Flame className="h-5 w-5" />
               Take the Quiz
-            </Link>
+            </a>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"

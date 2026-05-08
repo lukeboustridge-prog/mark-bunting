@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Flame, Mic, PenTool, ArrowRight } from 'lucide-react';
+import { Flame, Mic, Briefcase, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const services = [
@@ -26,12 +26,12 @@ const services = [
     iconColor: 'text-secondary',
   },
   {
-    title: 'Speech Savers',
-    subtitle: 'Celebrant, MC & Speech Coaching',
+    title: 'Hire Your Fire',
+    subtitle: 'Celebrant & Master of Ceremonies',
     description:
-      'Mark is a registered marriage and funeral celebrant, an experienced Master of Ceremonies, and a speech coach. From wedding ceremonies to conference MC work to coaching your best man speech — life\'s biggest moments deserve the best.',
-    icon: PenTool,
-    href: '/services/speech-savers',
+      'Mark is a registered marriage and funeral celebrant and an experienced Master of Ceremonies. From wedding ceremonies to funerals to corporate MC work — Mark brings warmth, dignity and a master communicator’s touch to life’s biggest moments.',
+    icon: Briefcase,
+    href: '/services/hire-your-fire',
     gradient: 'from-accent via-primary to-secondary',
     iconColor: 'text-accent',
   },

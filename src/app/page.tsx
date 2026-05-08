@@ -11,10 +11,7 @@ import {
 import {
   Flame,
   Sparkles,
-  Mic,
   Users,
-  MessageCircleHeart,
-  Presentation,
   Star,
   Quote,
   ArrowRight,
@@ -25,7 +22,17 @@ import {
   ChevronRight,
   Phone,
   MapPin,
+  Handshake,
+  GraduationCap,
+  Heart,
+  UserCheck,
+  ShieldCheck,
+  TrendingUp,
+  ShieldAlert,
+  Briefcase,
 } from 'lucide-react';
+
+const FAST_FLAMES_URL = 'https://markbunting.coxy.nz/fastflames/';
 
 /* ──────────────────────────────────────────────
    Animation helpers
@@ -90,6 +97,7 @@ export default function HomePage() {
   return (
     <main className="overflow-hidden">
       <Hero />
+      <Intro />
       <Benefits />
       <Services />
       <QuizCTA />
@@ -146,62 +154,18 @@ function Hero() {
         />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center py-24">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm rounded-full px-5 py-2 mb-8 text-sm font-medium text-charcoal"
-        >
-          <Flame className="w-4 h-4 text-flame" />
-          Communication Training That Actually Sticks
-        </motion.div>
-
+      {/* Content — full-viewport "COMMUNICATE BETTER" */}
+      <div className="relative z-10 w-full px-6 text-center">
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-charcoal mb-6 leading-[1.1]"
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="font-extrabold tracking-tight text-charcoal leading-[0.95]"
+          style={{ fontSize: 'clamp(3rem, 14vw, 12rem)' }}
         >
-          I Teach People to{' '}
-          <span className="text-gradient-fire inline-block">
-            Get On With Each Other
-          </span>
+          <span className="block">COMMUNICATE</span>
+          <span className="block text-gradient-fire">BETTER</span>
         </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-          className="text-xl sm:text-2xl text-charcoal/70 max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          Understand your communication style. Connect with your team.
-          Present with confidence. All through one simple framework
-          that&apos;s more powerful than DISC or Myers-Briggs.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <Link
-            href="/quiz"
-            className="inline-flex items-center justify-center gap-2 bg-flame hover:bg-primary-dark text-white font-semibold px-8 py-4 rounded-full text-lg shadow-lg shadow-flame/25 hover:shadow-xl hover:shadow-flame/30 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <Flame className="w-5 h-5" />
-            What&apos;s Your Communication Style?
-          </Link>
-          <Link
-            href="#services"
-            className="inline-flex items-center justify-center gap-2 border-2 border-charcoal/20 hover:border-flame text-charcoal hover:text-flame font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:-translate-y-0.5 bg-white/40 backdrop-blur-sm"
-          >
-            How It Works
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
@@ -213,7 +177,7 @@ function Hero() {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-6 h-10 rounded-full border-2 border-charcoal/20 flex items-start justify-center p-1.5"
+            className="w-6 h-10 rounded-full border-2 border-charcoal/30 flex items-start justify-center p-1.5"
           >
             <motion.div className="w-1.5 h-3 rounded-full bg-flame" />
           </motion.div>
@@ -224,33 +188,161 @@ function Hero() {
 }
 
 /* ──────────────────────────────────────────────
+   1b. INTRO — "I teach people to get on with each other"
+   ────────────────────────────────────────────── */
+
+function Intro() {
+  const { ref, inView } = useAnimateOnScroll();
+  return (
+    <section ref={ref} className="py-24 md:py-32 bg-cream">
+      <motion.div
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        className="max-w-3xl mx-auto px-6 text-center"
+      >
+        <motion.h2
+          variants={fadeUp}
+          custom={0}
+          className="text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal mb-10 leading-tight"
+        >
+          I teach people to{' '}
+          <span className="text-gradient-fire">get on with each other</span>
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          custom={1}
+          className="text-xl text-charcoal mb-6 leading-relaxed font-medium"
+        >
+          Don&apos;t spend all your time fighting fires. Use the flames to your advantage.
+        </motion.p>
+        <motion.p
+          variants={fadeUp}
+          custom={2}
+          className="text-lg text-slate mb-6 leading-relaxed"
+        >
+          As a human communications specialist I design programmes specifically for you and
+          your organisation, tailored to your needs.
+        </motion.p>
+        <motion.p
+          variants={fadeUp}
+          custom={3}
+          className="text-lg text-slate mb-6 leading-relaxed"
+        >
+          It may be through the OPEN Flames framework, presentation and public speaking
+          training, personal branding, executive coaching or a simple team-building day.
+        </motion.p>
+        <motion.p
+          variants={fadeUp}
+          custom={4}
+          className="text-lg text-charcoal mb-3 leading-relaxed font-medium"
+        >
+          When you have a team communicating effectively, it&apos;s all HEHE.
+        </motion.p>
+        <motion.p
+          variants={fadeUp}
+          custom={5}
+          className="text-lg text-flame font-semibold tracking-wide"
+        >
+          Harmony. Efficiency. Happiness. Effectiveness.
+        </motion.p>
+      </motion.div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────
    2. BENEFITS
    ────────────────────────────────────────────── */
 
-const benefits = [
+type Benefit = {
+  icon: typeof Users;
+  title: string;
+  paragraphs: string[];
+  color: string;
+  bg: string;
+};
+
+const benefits: Benefit[] = [
   {
-    icon: Users,
-    title: 'Your Team Finally Gets Each Other',
-    description:
-      'Ever wonder why some colleagues just don\'t click? We don\'t all speak the same style. Discover each other\'s communication colours and watch the friction disappear.',
+    icon: Handshake,
+    title: 'Help good people become legendary teams',
+    paragraphs: [
+      'Do your employees function as a cohesive team, or more like a group of individual contributors?',
+      'Even if you have good people on staff, if they don\u2019t work well together, you\u2019ll never grow as fast as you should, and your bottom line will suffer.',
+      'Open Flames can help your people come together as a team by providing you with a solid framework for leveraging the collective talents of the group.',
+      'Do this and your growth will accelerate, and your profits will soar!',
+    ],
     color: 'text-flame',
     bg: 'bg-flame/10',
   },
   {
-    icon: Presentation,
-    title: 'You Present With Confidence',
-    description:
-      'No more dreading that next presentation. Learn a framework that turns nervous speakers into compelling ones \u2014 simpler than anything you\'ve tried before.',
+    icon: GraduationCap,
+    title: 'Teach the entire organisation to communicate more effectively',
+    paragraphs: [
+      'What is the cost of bad communication?',
+      'Sales fall through. Deadlines are missed. People quit their jobs. Culture suffers. Frustration rises\u2026 and profits TANK.',
+      'The good news is that this can be an easy fix.',
+      'With Open Flames training under their belts, your employees will quickly learn how to communicate in all four personality styles.',
+      'Fix your communication issues in less than 6 hours and your team will be hard to beat!',
+    ],
     color: 'text-ember',
     bg: 'bg-ember/10',
   },
   {
-    icon: MessageCircleHeart,
-    title: 'Your Relationships Transform',
-    description:
-      'At work, at home, everywhere in between. When you understand how people are wired, every conversation gets easier. The skills you learn here change everything.',
+    icon: Heart,
+    title: 'Cultivate great culture',
+    paragraphs: [
+      'How many of your employees wake up excited to come to work every day?',
+      'To stay competitive and retain the best talent in today\u2019s business climate, you need a great CULTURE \u2014 but have you noticed the first part of \u2018culture\u2019 is \u2018cult\u2019? You have to create the kind of team that people WANT to be part of without losing themselves in the process.',
+      'Our training focuses on finding your fire and appreciating others\u2019.',
+    ],
     color: 'text-amber',
     bg: 'bg-amber/10',
+  },
+  {
+    icon: UserCheck,
+    title: 'Stop making bad hires',
+    paragraphs: [
+      'Every bad hiring decision your team makes costs thousands of dollars.',
+      'Use the Flames framework to determine the exact traits you are looking for (or are looking to avoid!) in the candidates you interview and what their communication style will add to your existing team dynamic.',
+      'When you hire the right people, you win!',
+    ],
+    color: 'text-flame',
+    bg: 'bg-flame/10',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Build trust and loyalty',
+    paragraphs: [
+      'All life and business is relationships; relationships are built on trust.',
+      'When you share the Flames with your employees, they will understand how to apply it at work, at home, and even in the way they see themselves.',
+      'They will feel like the organisation is investing in them personally.',
+      'Increased trust and loyalty lead to better overall team commitment, culture, and performance!',
+    ],
+    color: 'text-ember',
+    bg: 'bg-ember/10',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Ramp up sales performance',
+    paragraphs: [
+      'People skills are at the heart of sales performance.',
+      'Salespeople need to understand which of their own limiting behaviours are costing them sales, how to read the styles of their potential customers so they communicate effectively, and how to make the sales process easy and natural for each of the four Flames.',
+    ],
+    color: 'text-amber',
+    bg: 'bg-amber/10',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Reduce conflict',
+    paragraphs: [
+      'Did you know that managers typically spend 25% of their time or more resolving personality conflicts in the workplace?',
+      'How much money are YOU wasting on conflict? Take the total number of managers in your organisation, multiply by an average manager\u2019s annual salary, and multiply that number by 0.25.',
+      'Stop throwing that money away! Instead, invest a small fraction of that cost into OPEN Flames.',
+      'Flames will help you reduce conflict in your workplace and free up your managers\u2019 time so they can actually get real work done!',
+    ],
+    color: 'text-flame',
+    bg: 'bg-flame/10',
   },
 ];
 
@@ -275,40 +367,52 @@ function Benefits() {
           <motion.h2
             variants={fadeUp}
             custom={1}
-            className="text-4xl sm:text-5xl font-bold text-charcoal mb-4"
+            className="text-4xl sm:text-5xl font-bold text-charcoal mb-6"
           >
-            Communication Is Your{' '}
-            <span className="text-gradient-fire">Superpower</span>
+            Communication makes your{' '}
+            <span className="text-gradient-fire">team work.</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
             custom={2}
-            className="text-lg text-slate max-w-2xl mx-auto"
+            className="text-lg text-slate max-w-2xl mx-auto mb-3 leading-relaxed"
           >
-            You&apos;ve never been taught how to truly connect. One simple framework
-            will change how you communicate with everyone around you.
+            People say communications training is a soft skill. Try running your engine
+            without the soft stuff and see how long you last.
+          </motion.p>
+          <motion.p
+            variants={fadeUp}
+            custom={3}
+            className="text-lg text-slate max-w-2xl mx-auto leading-relaxed"
+          >
+            You&apos;ve got the right players in your team because of what they bring to
+            your organisation — now invest in getting them to work together.
           </motion.p>
         </motion.div>
 
         <motion.div
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {benefits.map((b, i) => (
             <motion.div
               key={b.title}
               variants={scaleIn}
               custom={i}
-              className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:shadow-flame/8 transition-all duration-500 hover:-translate-y-1 border border-warm-gray/50"
+              className="group bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl hover:shadow-flame/8 transition-all duration-500 hover:-translate-y-1 border border-warm-gray/50 flex flex-col"
             >
               <div
-                className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${b.bg} ${b.color} mb-6 group-hover:scale-110 transition-transform duration-300`}
+                className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${b.bg} ${b.color} mb-5 group-hover:scale-110 transition-transform duration-300`}
               >
-                <b.icon className="w-7 h-7" />
+                <b.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-charcoal mb-3">{b.title}</h3>
-              <p className="text-slate leading-relaxed">{b.description}</p>
+              <h3 className="text-lg font-bold text-charcoal mb-3 leading-snug">{b.title}</h3>
+              <div className="space-y-3 text-slate leading-relaxed text-sm">
+                {b.paragraphs.map((p, pi) => (
+                  <p key={pi}>{p}</p>
+                ))}
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -341,12 +445,12 @@ const services = [
     accent: 'ember' as const,
   },
   {
-    icon: Mic,
-    title: 'Speech Savers',
-    subtitle: 'Your Words, Nailed',
+    icon: Briefcase,
+    title: 'Hire Your Fire',
+    subtitle: 'Book Mark for Your Event',
     description:
-      'Got a wedding speech that needs to land? A business keynote that has to impress? Get help crafting words that sound like you, only sharper.',
-    href: '/services/speech-savers',
+      'Weddings, funerals, corporate MC work. Mark brings warmth, wit and a master communicator’s touch to the moments that matter most. He’s not the star — you are.',
+    href: '/services/hire-your-fire',
     accent: 'amber' as const,
   },
 ];
@@ -527,14 +631,16 @@ function QuizCTA() {
         </motion.p>
 
         <motion.div variants={fadeUp} custom={3}>
-          <Link
-            href="/quiz"
+          <a
+            href={FAST_FLAMES_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2.5 bg-flame hover:bg-primary-dark text-white font-bold px-10 py-5 rounded-full text-lg shadow-lg shadow-flame/30 hover:shadow-xl hover:shadow-flame/40 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105"
           >
             <Flame className="w-6 h-6" />
             Take the Quiz Now
             <ArrowRight className="w-5 h-5" />
-          </Link>
+          </a>
         </motion.div>
       </motion.div>
     </section>

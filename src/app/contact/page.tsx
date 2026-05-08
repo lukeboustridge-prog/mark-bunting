@@ -230,7 +230,14 @@ export default function ContactPage() {
                 <Flame className="w-8 h-8 text-white/80 mx-auto mb-3" />
                 <h3 className="font-display text-lg font-bold text-white mb-2">Not sure what you need?</h3>
                 <p className="text-sm text-white/80 mb-5">Take the 15 Fast Flames quiz to discover your communication style first.</p>
-                <Link href="/quiz" className="inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-primary hover:bg-cream transition-colors">Take the Quiz</Link>
+                <a
+                  href="https://markbunting.coxy.nz/fastflames/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-primary hover:bg-cream transition-colors"
+                >
+                  Take the Quiz
+                </a>
               </div>
             </motion.div>
           </div>

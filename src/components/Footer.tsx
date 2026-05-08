@@ -110,9 +110,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/quiz" className="hover:text-primary transition-colors">
+                <a
+                  href="https://markbunting.coxy.nz/fastflames/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
                   15 Fast Flames Quiz
-                </Link>
+                </a>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-primary transition-colors">
@@ -156,10 +161,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/speech-savers"
+                  href="/services/hire-your-fire"
                   className="hover:text-primary transition-colors"
                 >
-                  Speech Savers
+                  Hire Your Fire
                 </Link>
               </li>
             </ul>

@@ -185,9 +185,14 @@ export default function AboutPage() {
               <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white hover:bg-primary-dark transition-colors">
                 Get in Touch <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/quiz" className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3.5 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors">
+              <a
+                href="https://markbunting.coxy.nz/fastflames/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3.5 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-colors"
+              >
                 Take the Quiz <Flame className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>
