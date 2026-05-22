@@ -17,6 +17,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://markbunting.co.nz"),
   title: {
     default: "Mark Bunting Human Communications",
     template: "%s | Mark Bunting Human Communications",
@@ -33,9 +34,11 @@ export const metadata: Metadata = {
     "human communications",
   ],
   authors: [{ name: "Mark Bunting" }],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_NZ",
+    url: "https://markbunting.co.nz",
     siteName: "Mark Bunting Human Communications",
     title: "Mark Bunting Human Communications",
     description:
@@ -43,7 +46,58 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    title: "Mark Bunting Human Communications",
+    description:
+      "I teach people to get on with each other. Communication training, keynote speaking, and coaching for teams and leaders across New Zealand.",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+const SITE_URL = "https://markbunting.co.nz";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Mark Bunting",
+  jobTitle: "Communication Trainer, Keynote Speaker & Coach",
+  url: SITE_URL,
+  image: `${SITE_URL}/images/mark-portrait-bw.png`,
+  description:
+    "Mark Bunting teaches people to get on with each other — communication training, keynote speaking, and coaching for teams and leaders across New Zealand.",
+  worksFor: {
+    "@type": "Organization",
+    name: "Mark Bunting Human Communications",
+    url: SITE_URL,
+  },
+  address: { "@type": "PostalAddress", addressCountry: "NZ" },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Mark Bunting Human Communications",
+  url: SITE_URL,
+  inLanguage: "en-NZ",
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Mark Bunting Human Communications",
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/mark-portrait-bw.png`,
+  founder: { "@type": "Person", name: "Mark Bunting" },
+  areaServed: "NZ",
 };
 
 export default function RootLayout({
@@ -57,6 +111,18 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-cream text-charcoal">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

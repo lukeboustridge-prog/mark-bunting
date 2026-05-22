@@ -1,9 +1,23 @@
 import { Flame, Play, Film } from "lucide-react";
+import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { videos } from "@/lib/db/schema";
 import { desc, eq } from "drizzle-orm";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Videos",
+  description:
+    "Watch Mark Bunting in action — keynote talks, workshop highlights, and short-form clips on communication, connection, and culture.",
+  alternates: { canonical: "/videos" },
+  openGraph: {
+    url: "https://markbunting.co.nz/videos",
+    title: "Videos — Mark Bunting",
+    description:
+      "Keynote talks, workshop highlights, and short-form clips on communication and culture.",
+  },
+};
 
 function formatDate(date: Date | null): string {
   if (!date) return "";

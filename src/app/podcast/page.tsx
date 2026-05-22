@@ -6,11 +6,25 @@ import {
   ExternalLink,
   Mic2,
 } from "lucide-react";
+import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { podcastEpisodes } from "@/lib/db/schema";
 import { desc, eq } from "drizzle-orm";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Podcast",
+  description:
+    "Audio episodes with Mark Bunting on human communication, connection, language, and culture. Listen on Podbean, Spotify, or Apple Podcasts.",
+  alternates: { canonical: "/podcast" },
+  openGraph: {
+    url: "https://markbunting.co.nz/podcast",
+    title: "Podcast — Mark Bunting",
+    description:
+      "Audio episodes on human communication, connection, language, and culture.",
+  },
+};
 
 const platforms = [
   {

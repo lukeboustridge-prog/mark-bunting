@@ -1,11 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Flame, Clock, ArrowRight, BookOpen } from "lucide-react";
+import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { blogPosts } from "@/lib/db/schema";
 import { desc, eq } from "drizzle-orm";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "The Fire Blog",
+  description:
+    "Articles by Mark Bunting on communication, leadership, language, listening, and culture — from the frontline of human connection.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    url: "https://markbunting.co.nz/blog",
+    title: "The Fire Blog — Mark Bunting",
+    description:
+      "Articles on communication, leadership, language, listening, and culture.",
+  },
+};
 
 const categoryColors: Record<string, string> = {
   Connection: "bg-primary/10 text-primary",
